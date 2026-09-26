@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
+import Image from "public/banner.png";
 import WorkoutCard from "../components/WorkoutCard";
 import SortDropdown from "../components/SortDropdown";
 import Loading from "../components/Loading";
