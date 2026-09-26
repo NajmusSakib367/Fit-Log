@@ -35,6 +35,7 @@ export default function HomePage() {
     });
     return copy;
   }, [workouts, sortBy]);
+
   return (
     <div>
       {/* Hero */}
@@ -72,5 +73,37 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      );
+
+      {/* Library */}
+      <section id="library" className="mx-auto max-w-7xl px-5 py-16 scroll-mt-20">
+        <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <h2 className="font-display text-3xl font-bold uppercase tracking-wide text-white">
+              The Library
+            </h2>
+            <p className="mt-2 text-sm text-muted">
+              Twelve lifts covering every major muscle group.
+            </p>
+          </div>
+          {!loading && workouts.length > 0 && (
+            <SortDropdown value={sortBy} onChange={setSortBy} />
+          )}
+        </div>
+
+        {loading ? (
+          <Loading />
+        ) : sorted.length === 0 ? (
+          <p className="py-16 text-center text-sm text-muted">
+            No workouts available right now. Please check back soon.
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {sorted.map((workout) => (
+              <WorkoutCard key={workout.id} workout={workout} />
+            ))}
+          </div>
+        )}
+      </section>
+    </div>
+  );
 }
